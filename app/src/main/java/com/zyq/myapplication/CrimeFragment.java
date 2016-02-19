@@ -3,13 +3,16 @@ package com.zyq.myapplication;
 
 import android.app.ApplicationErrorReport;
 import android.os.Bundle;
-//import android.app.Fragment;
-import android.support.v4.app.Fragment;
+import android.app.Fragment;
+//import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -27,8 +30,10 @@ public class CrimeFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    private Crime crame;
+    private Crime crime;
     private EditText editeTest;
+    private CheckBox mCheckBoxSolved;
+    private Button mButtonCrimeDate;
 
 
     /**
@@ -56,7 +61,7 @@ public class CrimeFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        crame = new Crime();
+        crime = new Crime();
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -76,12 +81,23 @@ public class CrimeFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                crame.setTitle(s.toString());
+                crime.setTitle(s.toString());
             }
 
             @Override
             public void afterTextChanged(Editable s) {
 
+            }
+        });
+        mButtonCrimeDate = (Button) v.findViewById(R.id.button_crime_date);
+        mButtonCrimeDate.setText(crime.getmDate().toString());
+        mButtonCrimeDate.setEnabled(false);
+
+        mCheckBoxSolved = (CheckBox) v.findViewById(R.id.checkBox);
+        mCheckBoxSolved.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                crime.setmSloved(isChecked);
             }
         });
 //        TextView textView = new TextView(getActivity());
