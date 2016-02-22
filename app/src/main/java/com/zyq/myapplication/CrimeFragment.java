@@ -1,7 +1,6 @@
 package com.zyq.myapplication;
 
 
-import android.app.ApplicationErrorReport;
 import android.os.Bundle;
 import android.app.Fragment;
 //import android.support.v4.app.Fragment;
@@ -14,7 +13,8 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.TextView;
+
+import java.util.UUID;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -24,7 +24,7 @@ import android.widget.TextView;
 public class CrimeFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
+    public static final String EXTRA_CRIME_ID = "CrimeListActivityFragment.EXTRA_CRIME_ID";
     private static final String ARG_PARAM2 = "param2";
 
     // TODO: Rename and change types of parameters
@@ -48,7 +48,7 @@ public class CrimeFragment extends Fragment {
     public static CrimeFragment newInstance(String param1, String param2) {
         CrimeFragment fragment = new CrimeFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
+        args.putString(EXTRA_CRIME_ID, param1);
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
@@ -61,9 +61,9 @@ public class CrimeFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        crime = new Crime();
+        crime = CrimeLab.getCrimeLab(getActivity()).getCrime((UUID) getActivity().getIntent().getSerializableExtra(CrimeFragment.EXTRA_CRIME_ID));
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
+            mParam1 = getArguments().getString(EXTRA_CRIME_ID);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
@@ -72,6 +72,7 @@ public class CrimeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_crime, container, false);
+//        crime =
         editeTest = (EditText) v.findViewById(R.id.crimeTitle);
         editeTest.addTextChangedListener(new TextWatcher() {
             @Override
@@ -89,6 +90,8 @@ public class CrimeFragment extends Fragment {
 
             }
         });
+        editeTest.setText(crime.getTitle());
+
         mButtonCrimeDate = (Button) v.findViewById(R.id.button_crime_date);
         mButtonCrimeDate.setText(crime.getmDate().toString());
         mButtonCrimeDate.setEnabled(false);
@@ -100,6 +103,7 @@ public class CrimeFragment extends Fragment {
                 crime.setmSloved(isChecked);
             }
         });
+        mCheckBoxSolved.setChecked(crime.ismSloved());
 //        TextView textView = new TextView(getActivity());
 //        textView.setText(R.string.hello_blank_fragment);
         return v;

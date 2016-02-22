@@ -2,6 +2,7 @@ package com.zyq.myapplication;
 
 import android.app.Fragment;
 import android.app.ListFragment;
+import android.content.Intent;
 import android.os.Bundle;
 //import android.support.v4.app.ListFragment;
 import android.util.Log;
@@ -24,6 +25,7 @@ import java.util.List;
  */
 public class CrimeListActivityFragment extends ListFragment {
 
+//    public static String EXTRA_CRIME_ID = "CrimeListActivityFragment.EXTRA_CRIME_ID";
     private List<Crime> crimeList ;
     private String TAG = "CrimeListActivityFragment";
     public CrimeListActivityFragment() {
@@ -43,6 +45,10 @@ public class CrimeListActivityFragment extends ListFragment {
         super.onListItemClick(l, v, position, id);
         System.out.println("iterm" + v + " is clicked");
         Log.d(TAG, "iterm" + v + " is clicked");
+        Crime c = ((CrimeAdapter) getListAdapter()).getItem(position);
+        Intent intent = new Intent(getActivity(), MainActivity.class);
+        intent.putExtra(CrimeFragment.EXTRA_CRIME_ID, c.getId());
+        startActivity(intent);
     }
 
     private class CrimeAdapter extends ArrayAdapter<Crime>{
