@@ -43,4 +43,9 @@ public class Crime {
     public void setmSloved(boolean mSloved) {
         this.mSloved = mSloved;
     }
+
+    @Override
+    public String toString() {
+        return title;
+    }
 }

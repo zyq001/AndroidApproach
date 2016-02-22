@@ -3,29 +3,25 @@ package com.zyq.myapplication;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.os.PersistableBundle;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 
-public class MainActivity extends SingleFragmentActivity {
+public abstract class SingleFragmentActivity extends Activity {
+
     @Override
-    protected Fragment createFragment() {
-        return new CrimeFragment();
-    }
-
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-////        setContentView(R.layout.activity_fragment);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 //        setContentView(R.layout.activity_fragment);
-//
-//        FragmentManager fragmentManager = getFragmentManager();
-//        Fragment fragment = fragmentManager.findFragmentById(R.id.fragmentContainer);
-//        if (fragment == null) {
-//            fragment = new CrimeFragment();
-//            fragmentManager.beginTransaction()
-//                    .add(R.id.fragmentContainer, fragment)
-//                    .commit();
-//        }
+        setContentView(R.layout.activity_fragment);
+
+        FragmentManager fragmentManager = getFragmentManager();
+        Fragment fragment = fragmentManager.findFragmentById(R.id.fragmentContainer);
+        if (fragment == null) {
+            fragment = createFragment();
+            fragmentManager.beginTransaction()
+                    .add(R.id.fragmentContainer, fragment)
+                    .commit();
+        }
 //
 //        findViewById(R.id.orgBtn2StartNewBtn).setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -46,12 +42,14 @@ public class MainActivity extends SingleFragmentActivity {
 ////                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://jiekexueyuan.com")));
 //            }
 //        });
-//
-//    }
-//
-//    @Override
-//    public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
-//        super.onCreate(savedInstanceState, persistentState);
-//
-//    }
+
+    }
+
+    protected abstract Fragment createFragment();
+
+    @Override
+    public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
+        super.onCreate(savedInstanceState, persistentState);
+
+    }
 }
