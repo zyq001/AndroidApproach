@@ -1,15 +1,20 @@
 package com.zyq.myapplication;
 
 import android.app.Activity;
-import android.app.Fragment;
+//import android.app.Fragment;
 import android.app.FragmentManager;
 import android.os.PersistableBundle;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+
+import java.util.UUID;
 
 public class MainActivity extends SingleFragmentActivity {
     @Override
     protected Fragment createFragment() {
-        return new CrimeFragment();
+        UUID uuid = (UUID) getIntent().getSerializableExtra(CrimeFragment.EXTRA_CRIME_ID);
+        return CrimeFragment.newInstance(uuid);
+//        return new CrimeFragment();
     }
 
 //    @Override

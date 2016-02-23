@@ -2,8 +2,9 @@ package com.zyq.myapplication;
 
 
 import android.os.Bundle;
-import android.app.Fragment;
+//import android.app.Fragment;
 //import android.support.v4.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -54,6 +55,15 @@ public class CrimeFragment extends Fragment {
         return fragment;
     }
 
+    public static CrimeFragment newInstance(UUID uuid) {
+
+        Bundle args = new Bundle();
+        args.putSerializable(EXTRA_CRIME_ID, uuid);
+        CrimeFragment fragment = new CrimeFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
     public CrimeFragment() {
         // Required empty public constructor
     }
@@ -61,11 +71,13 @@ public class CrimeFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        crime = CrimeLab.getCrimeLab(getActivity()).getCrime((UUID) getActivity().getIntent().getSerializableExtra(CrimeFragment.EXTRA_CRIME_ID));
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(EXTRA_CRIME_ID);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+//        crime = CrimeLab.getCrimeLab(getActivity()).getCrime((UUID) getActivity().getIntent().getSerializableExtra(CrimeFragment.EXTRA_CRIME_ID));
+        UUID crimeId = (UUID) getArguments().getSerializable(EXTRA_CRIME_ID);
+        crime = CrimeLab.getCrimeLab(getActivity()).getCrime(crimeId);
+//        if (getArguments() != null) {
+//            mParam1 = getArguments().getString(EXTRA_CRIME_ID);
+//            mParam2 = getArguments().getString(ARG_PARAM2);
+//        }
     }
 
     @Override
@@ -108,6 +120,7 @@ public class CrimeFragment extends Fragment {
 //        textView.setText(R.string.hello_blank_fragment);
         return v;
     }
+
 
 
 }

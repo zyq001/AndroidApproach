@@ -1,12 +1,16 @@
 package com.zyq.myapplication;
 
 import android.app.Activity;
-import android.app.Fragment;
-import android.app.FragmentManager;
+//import android.app.Fragment;
+//import android.app.Fragment;
+//import android.app.FragmentManager;
 import android.os.Bundle;
 import android.os.PersistableBundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 
-public abstract class SingleFragmentActivity extends Activity {
+public abstract class SingleFragmentActivity extends FragmentActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -14,7 +18,7 @@ public abstract class SingleFragmentActivity extends Activity {
 //        setContentView(R.layout.activity_fragment);
         setContentView(R.layout.activity_fragment);
 
-        FragmentManager fragmentManager = getFragmentManager();
+        FragmentManager fragmentManager = getSupportFragmentManager();
         Fragment fragment = fragmentManager.findFragmentById(R.id.fragmentContainer);
         if (fragment == null) {
             fragment = createFragment();
