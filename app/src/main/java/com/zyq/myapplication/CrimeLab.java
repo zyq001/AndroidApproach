@@ -16,7 +16,7 @@ public class CrimeLab {
     private CrimeLab(Context _context){
         this.context = _context;
         crimeArrayList = new ArrayList<Crime>(100);
-        for(int i = 0; i < 100; i++){
+        for(int i = 0; i < 2; i++){
             Crime c = new Crime();
             c.setTitle("Crime #" + i);
             c.setmSloved(i % 2 == 0);
@@ -31,6 +31,9 @@ public class CrimeLab {
         return crimeLab;
     }
 
+    public void addCrime(Crime c){
+        crimeArrayList.add(c);
+    }
     public Crime getCrime(UUID uuid){
         for(Crime crime: crimeArrayList){
             if(crime.getId().equals(uuid))

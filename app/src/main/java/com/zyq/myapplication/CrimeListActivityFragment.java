@@ -1,13 +1,14 @@
 package com.zyq.myapplication;
 
-import android.app.Fragment;
 //import android.app.ListFragment;
 import android.content.Intent;
 import android.os.Bundle;
 //import android.support.v4.app.ListFragment;
 import android.support.v4.app.ListFragment;
 import android.util.Log;
-import android.view.LayoutInflater;
+        import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 //import android.view.ViewGroup;
 import android.view.ViewGroup;
@@ -17,11 +18,7 @@ import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
-import java.sql.SQLOutput;
-import java.util.ArrayList;
-import java.util.List;
+        import java.util.List;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -37,6 +34,7 @@ public class CrimeListActivityFragment extends ListFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
         getActivity().setTitle(R.string.crimes_title);
         crimeList = CrimeLab.getCrimeLab(getActivity()).getCrimes();
 //        ArrayAdapter<Crime> arrayAdapter = new ArrayAdapter<Crime>(getActivity(), R.layout.support_simple_spinner_dropdown_item, crimeList);
@@ -47,6 +45,34 @@ public class CrimeListActivityFragment extends ListFragment {
     public void onResume() {
         super.onResume();
         ((CrimeAdapter)getListAdapter()).notifyDataSetChanged();
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.menu_crime_list, menu);
+    }
+
+//    @Override
+//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//
+//        ((CrimeAdapter)getListAdapter()).notifyDataSetChanged();
+//    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.new_crime:
+                Crime newCrime = new Crime();
+                CrimeLab.getCrimeLab(getActivity()).addCrime(newCrime);
+                Intent i = new Intent(getActivity(), CrimePagerActivity.class);
+                i.putExtra(CrimeFragment.EXTRA_CRIME_ID, newCrime.getId());
+                startActivityForResult(i, 0);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     @Override
