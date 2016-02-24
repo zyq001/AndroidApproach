@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 //import android.support.v4.app.ListFragment;
 import android.support.v4.app.ListFragment;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
         import android.view.Menu;
 import android.view.MenuInflater;
@@ -22,23 +24,34 @@ import android.widget.TextView;
 
 /**
  * A placeholder fragment containing a simple view.
+ * 记录列表界面Fragment，使用CrimeAdapter（extends ArrayAdapter<Crime>）显示记录数组
+ * 系统变量数组时根据每个元素 调用Adapter.getView（）获取列表中对应记录的View视图
  */
 public class CrimeListActivityFragment extends ListFragment {
 
 //    public static String EXTRA_CRIME_ID = "CrimeListActivityFragment.EXTRA_CRIME_ID";
     private List<Crime> crimeList ;
     private String TAG = "CrimeListActivityFragment";
+    private Toolbar toolbar;
+
     public CrimeListActivityFragment() {
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+//        addToolbar();
         setHasOptionsMenu(true);
         getActivity().setTitle(R.string.crimes_title);
         crimeList = CrimeLab.getCrimeLab(getActivity()).getCrimes();
 //        ArrayAdapter<Crime> arrayAdapter = new ArrayAdapter<Crime>(getActivity(), R.layout.support_simple_spinner_dropdown_item, crimeList);
         setListAdapter(new CrimeAdapter(crimeList));
+    }
+
+    private void addToolbar() {
+        toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
+        toolbar.setTitle("CrimeRecd");
+        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
     }
 
     @Override

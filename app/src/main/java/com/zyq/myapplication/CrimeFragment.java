@@ -1,13 +1,20 @@
 package com.zyq.myapplication;
 
 
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 //import android.app.Fragment;
 //import android.support.v4.app.Fragment;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.NavUtils;
+import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -40,6 +47,8 @@ public class CrimeFragment extends Fragment {
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
+     *
+     * 记录详情fragment，可自带参数args
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
@@ -74,6 +83,8 @@ public class CrimeFragment extends Fragment {
 //        crime = CrimeLab.getCrimeLab(getActivity()).getCrime((UUID) getActivity().getIntent().getSerializableExtra(CrimeFragment.EXTRA_CRIME_ID));
         UUID crimeId = (UUID) getArguments().getSerializable(EXTRA_CRIME_ID);
         crime = CrimeLab.getCrimeLab(getActivity()).getCrime(crimeId);
+
+        setHasOptionsMenu(true);
 //        if (getArguments() != null) {
 //            mParam1 = getArguments().getString(EXTRA_CRIME_ID);
 //            mParam2 = getArguments().getString(ARG_PARAM2);
@@ -95,6 +106,7 @@ public class CrimeFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 crime.setTitle(s.toString());
+//                getActivity().
             }
 
             @Override
@@ -116,11 +128,52 @@ public class CrimeFragment extends Fragment {
             }
         });
         mCheckBoxSolved.setChecked(crime.ismSloved());
+
+        if(Build.VERSION.SDK_INT > Build.VERSION_CODES.HONEYCOMB){
+            if(NavUtils.getParentActivityName(getActivity()) != null){
+                ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            }
+        }
+
 //        TextView textView = new TextView(getActivity());
 //        textView.setText(R.string.hello_blank_fragment);
         return v;
     }
 
+
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.menu_crime_list, menu);
+    }
+
+//    @Override
+//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//
+//        ((CrimeAdapter)getListAdapter()).notifyDataSetChanged();
+//    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.new_crime:
+                Crime newCrime = new Crime();
+                CrimeLab.getCrimeLab(getActivity()).addCrime(newCrime);
+                Intent i = new Intent(getActivity(), CrimePagerActivity.class);
+                i.putExtra(CrimeFragment.EXTRA_CRIME_ID, newCrime.getId());
+                startActivityForResult(i, 0);
+                return true;
+            case R.id.home:
+                if(NavUtils.getParentActivityName(getActivity()) != null){
+                    NavUtils.navigateUpFromSameTask(getActivity());
+                }
+                return true;//忘写的话 会导致toolbar初始化出问题，导致getSupportActionBar()返回null
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 
 
 }

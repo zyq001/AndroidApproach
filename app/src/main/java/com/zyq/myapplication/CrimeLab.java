@@ -8,6 +8,7 @@ import java.util.UUID;
 
 /**
  * Created by zangyq on 2016/2/22.
+ * 记录集合类
  */
 public class CrimeLab {
     private static CrimeLab crimeLab;
@@ -16,7 +17,7 @@ public class CrimeLab {
     private CrimeLab(Context _context){
         this.context = _context;
         crimeArrayList = new ArrayList<Crime>(100);
-        for(int i = 0; i < 2; i++){
+        for(int i = 0; i < 3; i++){
             Crime c = new Crime();
             c.setTitle("Crime #" + i);
             c.setmSloved(i % 2 == 0);

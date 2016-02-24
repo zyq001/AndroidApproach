@@ -9,7 +9,7 @@ import android.support.v4.app.Fragment;
 
 import java.util.UUID;
 
-public class MainActivity extends SingleFragmentActivity {
+public class CrimeDetailsActivity extends SingleFragmentActivity {
     @Override
     protected Fragment createFragment() {
         UUID uuid = (UUID) getIntent().getSerializableExtra(CrimeFragment.EXTRA_CRIME_ID);
@@ -36,7 +36,7 @@ public class MainActivity extends SingleFragmentActivity {
 //            @Override
 //            public void onClick(View v) {
 ////                System.out.println();
-//                Intent i = new Intent(MainActivity.this, AnotherActivity.class);
+//                Intent i = new Intent(CrimeDetailsActivity.this, AnotherActivity.class);
 //                i.putExtra("transferDate", "transferedData!");
 //
 //                Bundle bundle = new Bundle();

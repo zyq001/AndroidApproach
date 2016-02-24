@@ -9,23 +9,37 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 
 import java.util.List;
 import java.util.UUID;
 
-public class CrimePagerActivity extends FragmentActivity {
+/**
+ * 可滑动切换详情页容器Activity
+ * 使用ViewPager（自定义一个空的id资源）
+ * 使用PagerAdapter获取要显示的fragment（记录详情-CrimeFragment）
+ * */
+public class CrimePagerActivity extends AppCompatActivity {
 
     private ViewPager mViewPager;
     private List<Crime> crimes;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 //        setContentView(R.layout.activity_crime_pager);
 
-        mViewPager = new ViewPager(this);
-        mViewPager.setId(R.id.viewPager);
-        setContentView(mViewPager);
+//        mViewPager = new ViewPager(this);
+//        mViewPager.setId(R.id.viewPager);
+
+        setContentView(R.layout.activity_crime_parger);
+        mViewPager = (ViewPager) findViewById(R.id.viewpager);
+        toolbar = (Toolbar) findViewById(R.id.parger_toolbar);
+//        toolbar.setTitle("CrimeRecd");
+        setSupportActionBar(toolbar);
+
 
         crimes = CrimeLab.getCrimeLab(this).getCrimes();
         FragmentManager fm = getSupportFragmentManager();
