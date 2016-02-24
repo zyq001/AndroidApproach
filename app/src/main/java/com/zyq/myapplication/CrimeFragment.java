@@ -114,7 +114,7 @@ public class CrimeFragment extends Fragment {
 
             }
         });
-        editeTest.setText(crime.getTitle());
+        if(crime.getTitle() != null) editeTest.setText(crime.getTitle());
 
         mButtonCrimeDate = (Button) v.findViewById(R.id.button_crime_date);
         mButtonCrimeDate.setText(crime.getmDate().toString());

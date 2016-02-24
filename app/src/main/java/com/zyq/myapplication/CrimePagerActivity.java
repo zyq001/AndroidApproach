@@ -52,10 +52,33 @@ public class CrimePagerActivity extends AppCompatActivity {
                                   @Override
                                   public android.support.v4.app.Fragment getItem(int position) {
                                       Crime crime = crimes.get(position);
+//                                      setTitle(crime.getTitle());//此处crime是预测下一个要显示的crime，故不能再这里setTitle
                                       return CrimeFragment.newInstance(crime.getId());
                                   }
                               }
         );
+
+        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+
+                Crime current = crimes.get(position);
+                if(current.getTitle() != null){
+                    setTitle(current.getTitle());
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
 
         UUID selectedCrimeId = (UUID) getIntent().getSerializableExtra(CrimeFragment.EXTRA_CRIME_ID);
         for(int i = 0; i < crimes.size(); i++){

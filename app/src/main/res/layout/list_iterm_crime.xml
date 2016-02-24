@@ -7,7 +7,7 @@
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New CheckBox"
+        android:text="Solved?"
         android:id="@+id/crime_list_solvedCheckBox"
         android:layout_margin="8dp"
         android:gravity="center"
