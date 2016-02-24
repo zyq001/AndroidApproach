@@ -36,7 +36,7 @@ public class CrimePagerActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_crime_parger);
         mViewPager = (ViewPager) findViewById(R.id.viewpager);
-        toolbar = (Toolbar) findViewById(R.id.parger_toolbar);
+        toolbar = (Toolbar) findViewById(R.id.crime_pager_toolbar);
 //        toolbar.setTitle("CrimeRecd");
         setSupportActionBar(toolbar);
 

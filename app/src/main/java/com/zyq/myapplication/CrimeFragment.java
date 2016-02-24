@@ -81,10 +81,11 @@ public class CrimeFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 //        crime = CrimeLab.getCrimeLab(getActivity()).getCrime((UUID) getActivity().getIntent().getSerializableExtra(CrimeFragment.EXTRA_CRIME_ID));
-        UUID crimeId = (UUID) getArguments().getSerializable(EXTRA_CRIME_ID);
-        crime = CrimeLab.getCrimeLab(getActivity()).getCrime(crimeId);
+        UUID crimeId = (UUID) getArguments().getSerializable(EXTRA_CRIME_ID);//按返回键回到某Fragment时 并未putExtr传参数
+        if(crime == null) crime = CrimeLab.getCrimeLab(getActivity()).getCrime(crimeId);//故此处可能拿一个空crimeId去取crime
 
-        setHasOptionsMenu(true);
+//        setHasOptionsMenu(true);
+//        setRetainInstance(true);//保留frag
 //        if (getArguments() != null) {
 //            mParam1 = getArguments().getString(EXTRA_CRIME_ID);
 //            mParam2 = getArguments().getString(ARG_PARAM2);
@@ -163,6 +164,8 @@ public class CrimeFragment extends Fragment {
                 CrimeLab.getCrimeLab(getActivity()).addCrime(newCrime);
                 Intent i = new Intent(getActivity(), CrimePagerActivity.class);
                 i.putExtra(CrimeFragment.EXTRA_CRIME_ID, newCrime.getId());
+//                ((CrimeListActivityFragment.CrimeAdapter)CrimeListActivityFragment.getListAdapter()).notifyDataSetChanged();
+                CrimeListActivityFragment.notifyChange();
                 startActivityForResult(i, 0);
                 return true;
             case R.id.home:

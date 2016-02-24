@@ -1,14 +1,12 @@
 package com.zyq.myapplication;
 
-import android.app.Activity;
 //import android.app.Fragment;
 //import android.app.Fragment;
 //import android.app.FragmentManager;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
+        import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
@@ -58,7 +56,8 @@ public abstract class SingleFragmentActivity extends AppCompatActivity {
     }
 
     private void addToolbar() {
-        toolbar = (Toolbar)findViewById(R.id.toolbar);
+//        toolbar = (Toolbar)findViewById(R.id.org_toolbar);
+        toolbar = (Toolbar)findViewById(R.id.activity_fragment_toolbar);
         toolbar.setTitle("CrimeRecd");
         setSupportActionBar(toolbar);
     }

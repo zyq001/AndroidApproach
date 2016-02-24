@@ -33,8 +33,12 @@ public class CrimeListActivityFragment extends ListFragment {
     private List<Crime> crimeList ;
     private String TAG = "CrimeListActivityFragment";
     private Toolbar toolbar;
-
+    static CrimeAdapter crimeAdapter;
     public CrimeListActivityFragment() {
+    }
+
+    public static void notifyChange(){
+        crimeAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -45,14 +49,15 @@ public class CrimeListActivityFragment extends ListFragment {
         getActivity().setTitle(R.string.crimes_title);
         crimeList = CrimeLab.getCrimeLab(getActivity()).getCrimes();
 //        ArrayAdapter<Crime> arrayAdapter = new ArrayAdapter<Crime>(getActivity(), R.layout.support_simple_spinner_dropdown_item, crimeList);
-        setListAdapter(new CrimeAdapter(crimeList));
+        if(crimeAdapter == null) crimeAdapter = new CrimeAdapter(crimeList);
+        setListAdapter(crimeAdapter);
     }
 
-    private void addToolbar() {
-        toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
-        toolbar.setTitle("CrimeRecd");
-        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
-    }
+//    private void addToolbar() {
+//        toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
+//        toolbar.setTitle("CrimeRecd");
+//        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
+//    }
 
     @Override
     public void onResume() {
@@ -81,6 +86,7 @@ public class CrimeListActivityFragment extends ListFragment {
                 CrimeLab.getCrimeLab(getActivity()).addCrime(newCrime);
                 Intent i = new Intent(getActivity(), CrimePagerActivity.class);
                 i.putExtra(CrimeFragment.EXTRA_CRIME_ID, newCrime.getId());
+                ((CrimeAdapter)getListAdapter()).notifyDataSetChanged();
                 startActivityForResult(i, 0);
                 return true;
             default:
@@ -99,7 +105,7 @@ public class CrimeListActivityFragment extends ListFragment {
         startActivity(intent);
     }
 
-    private class CrimeAdapter extends ArrayAdapter<Crime>{
+    class CrimeAdapter extends ArrayAdapter<Crime>{
         public CrimeAdapter(List<Crime> crimes){
             super(getActivity(), 0, crimes);
         }
