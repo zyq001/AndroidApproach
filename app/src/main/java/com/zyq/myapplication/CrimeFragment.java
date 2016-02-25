@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -78,13 +79,23 @@ public class CrimeFragment extends Fragment {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        ((CrimePagerActivity)getActivity()).getmViewPager().getAdapter().notifyDataSetChanged();
+//        CrimeListActivityFragment.notifyChange();
+//        ((CrimePagerActivity)getActivity())
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 //        crime = CrimeLab.getCrimeLab(getActivity()).getCrime((UUID) getActivity().getIntent().getSerializableExtra(CrimeFragment.EXTRA_CRIME_ID));
         UUID crimeId = (UUID) getArguments().getSerializable(EXTRA_CRIME_ID);//按返回键回到某Fragment时 并未putExtr传参数
         if(crime == null) crime = CrimeLab.getCrimeLab(getActivity()).getCrime(crimeId);//故此处可能拿一个空crimeId去取crime
-
-//        setHasOptionsMenu(true);
+        Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.activity_fragment_toolbar);
+//        toolbar.setTitle("CrimeRecd");
+        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
+        setHasOptionsMenu(true);
 //        setRetainInstance(true);//保留frag
 //        if (getArguments() != null) {
 //            mParam1 = getArguments().getString(EXTRA_CRIME_ID);
@@ -165,7 +176,8 @@ public class CrimeFragment extends Fragment {
                 Intent i = new Intent(getActivity(), CrimePagerActivity.class);
                 i.putExtra(CrimeFragment.EXTRA_CRIME_ID, newCrime.getId());
 //                ((CrimeListActivityFragment.CrimeAdapter)CrimeListActivityFragment.getListAdapter()).notifyDataSetChanged();
-                CrimeListActivityFragment.notifyChange();
+//                CrimeListActivityFragment.notifyChange();
+                ((CrimePagerActivity)getActivity()).getmViewPager().getAdapter().notifyDataSetChanged();
                 startActivityForResult(i, 0);
                 return true;
             case R.id.home:

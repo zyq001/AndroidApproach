@@ -22,6 +22,10 @@ import java.util.UUID;
  * */
 public class CrimePagerActivity extends AppCompatActivity {
 
+    public ViewPager getmViewPager() {
+        return mViewPager;
+    }
+
     private ViewPager mViewPager;
     private List<Crime> crimes;
     private Toolbar toolbar;
@@ -36,9 +40,9 @@ public class CrimePagerActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_crime_parger);
         mViewPager = (ViewPager) findViewById(R.id.viewpager);
-        toolbar = (Toolbar) findViewById(R.id.crime_pager_toolbar);
-//        toolbar.setTitle("CrimeRecd");
-        setSupportActionBar(toolbar);
+//        toolbar = (Toolbar) findViewById(R.id.crime_pager_toolbar);
+////        toolbar.setTitle("CrimeRecd");
+//        setSupportActionBar(toolbar);
 
 
         crimes = CrimeLab.getCrimeLab(this).getCrimes();

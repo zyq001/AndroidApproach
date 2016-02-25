@@ -10,5 +10,6 @@
     tools:context="com.zyq.myapplication.CrimeListActivityFragment"
     android:orientation="horizontal">
 
+    <include layout="@layout/toolbar" android:id="@+id/activity_list_fragment_toolbar"/>
 
 </LinearLayout>

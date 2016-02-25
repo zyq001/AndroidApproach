@@ -21,7 +21,7 @@ public abstract class SingleFragmentActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 //        setContentView(R.layout.activity_fragment);
         setContentView(R.layout.activity_fragment);
-        addToolbar();
+//        addToolbar();
 
 
         FragmentManager fragmentManager = getSupportFragmentManager();
