@@ -13,9 +13,9 @@ import android.support.v7.widget.Toolbar;
 /**
  * 使用layout/activity_fragment视图的容器Activity，作为不同盛载fragment的activity的基类
  * */
-public abstract class SingleFragmentActivity extends AppCompatActivity {
+public abstract class SingleFragmentActivity extends BaseActivity {
 
-    private Toolbar toolbar;
+//    private Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,12 +55,12 @@ public abstract class SingleFragmentActivity extends AppCompatActivity {
 
     }
 
-    private void addToolbar() {
+//    private void addToolbar() {
+////        toolbar = (Toolbar)findViewById(R.id.org_toolbar);
 //        toolbar = (Toolbar)findViewById(R.id.org_toolbar);
-        toolbar = (Toolbar)findViewById(R.id.activity_fragment_toolbar);
-        toolbar.setTitle("CrimeRecd");
-        setSupportActionBar(toolbar);
-    }
+//        toolbar.setTitle("CrimeRecd");
+//        setSupportActionBar(toolbar);
+//    }
 
     protected abstract Fragment createFragment();
 

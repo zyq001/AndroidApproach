@@ -44,7 +44,7 @@ public class CrimeListActivityFragment extends ListFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        addToolbar();
+//        addToolbar();
         setHasOptionsMenu(true);
         getActivity().setTitle(R.string.crimes_title);
         crimeList = CrimeLab.getCrimeLab(getActivity()).getCrimes();
@@ -54,7 +54,7 @@ public class CrimeListActivityFragment extends ListFragment {
     }
 
     private void addToolbar() {
-        toolbar = (Toolbar) getActivity().findViewById(R.id.activity_list_fragment_toolbar);
+        toolbar = (Toolbar) getActivity().findViewById(R.id.org_toolbar);
         toolbar.setTitle("CrimeRecd");
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
     }

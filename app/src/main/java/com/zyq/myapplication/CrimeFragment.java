@@ -92,10 +92,11 @@ public class CrimeFragment extends Fragment {
 //        crime = CrimeLab.getCrimeLab(getActivity()).getCrime((UUID) getActivity().getIntent().getSerializableExtra(CrimeFragment.EXTRA_CRIME_ID));
         UUID crimeId = (UUID) getArguments().getSerializable(EXTRA_CRIME_ID);//按返回键回到某Fragment时 并未putExtr传参数
         if(crime == null) crime = CrimeLab.getCrimeLab(getActivity()).getCrime(crimeId);//故此处可能拿一个空crimeId去取crime
-        Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.activity_fragment_toolbar);
-//        toolbar.setTitle("CrimeRecd");
-        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
         setHasOptionsMenu(true);
+//        Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.activity_fragment_toolbar);
+//        toolbar.setTitle("CrimeRecd");
+//        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
+//        setHasOptionsMenu(true);
 //        setRetainInstance(true);//保留frag
 //        if (getArguments() != null) {
 //            mParam1 = getArguments().getString(EXTRA_CRIME_ID);

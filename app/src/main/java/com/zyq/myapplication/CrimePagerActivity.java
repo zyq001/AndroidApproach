@@ -20,7 +20,8 @@ import java.util.UUID;
  * 使用ViewPager（自定义一个空的id资源）
  * 使用PagerAdapter获取要显示的fragment（记录详情-CrimeFragment）
  * */
-public class CrimePagerActivity extends AppCompatActivity {
+//public class CrimePagerActivity extends AppCompatActivity {
+public class CrimePagerActivity extends BaseActivity {
 
     public ViewPager getmViewPager() {
         return mViewPager;
@@ -93,6 +94,7 @@ public class CrimePagerActivity extends AppCompatActivity {
         }
 //        mViewPager.setCurrentItem();
     }
+
 
 //    @Override
 //    protected Fragment createFragment() {

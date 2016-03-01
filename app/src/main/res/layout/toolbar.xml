@@ -7,8 +7,7 @@
     android:minHeight="?attr/actionBarSize"
     android:background="?attr/colorPrimary"
     android:fitsSystemWindows="true"
+    tools:showIn="@layout/activity_fragment"
     >
-    <!--tools:showIn="@layout/activity_fragment"-->
-    <!-->-->
 <!--//每个include此toolbar的 都得赋予一个新id-->
 </android.support.v7.widget.Toolbar>
