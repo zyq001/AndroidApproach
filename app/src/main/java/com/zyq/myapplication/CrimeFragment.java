@@ -185,6 +185,7 @@ public class CrimeFragment extends Fragment {
                 if(NavUtils.getParentActivityName(getActivity()) != null){
                     NavUtils.navigateUpFromSameTask(getActivity());
                 }
+//                onBackPressed();
                 return true;//忘写的话 会导致toolbar初始化出问题，导致getSupportActionBar()返回null
             default:
                 return super.onOptionsItemSelected(item);
