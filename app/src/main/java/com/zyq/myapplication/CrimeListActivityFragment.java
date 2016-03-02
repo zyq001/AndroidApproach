@@ -1,6 +1,7 @@
 package com.zyq.myapplication;
 
 //import android.app.ListFragment;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 //import android.support.v4.app.ListFragment;
@@ -8,7 +9,8 @@ import android.support.v4.app.ListFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-        import android.view.Menu;
+import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -49,7 +51,7 @@ public class CrimeListActivityFragment extends ListFragment {
         getActivity().setTitle(R.string.crimes_title);
         crimeList = CrimeLab.getCrimeLab(getActivity()).getCrimes();
 //        ArrayAdapter<Crime> arrayAdapter = new ArrayAdapter<Crime>(getActivity(), R.layout.support_simple_spinner_dropdown_item, crimeList);
-        if(crimeAdapter == null) crimeAdapter = new CrimeAdapter(crimeList);
+        if(crimeAdapter == null) crimeAdapter = new CrimeAdapter(getActivity(), crimeList);
         setListAdapter(crimeAdapter);
     }
 
@@ -106,14 +108,17 @@ public class CrimeListActivityFragment extends ListFragment {
     }
 
     class CrimeAdapter extends ArrayAdapter<Crime>{
-        public CrimeAdapter(List<Crime> crimes){
-            super(getActivity(), 0, crimes);
+        Context context = null;
+        public CrimeAdapter(Context _context, List<Crime> crimes){
+            super(_context, 0, crimes);
+            this.context = _context;
+
         }
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             if(convertView == null){
-                convertView = getActivity().getLayoutInflater().inflate(R.layout.list_iterm_crime, null);
+                convertView = LayoutInflater.from(context).inflate(R.layout.list_iterm_crime, null);
 
             }
 

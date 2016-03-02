@@ -39,7 +39,8 @@
         </activity>
         <activity
             android:name=".CrimePagerActivity"
-            android:label="@string/title_activity_crime_pager">
+            android:label="@string/title_activity_crime_pager"
+            android:parentActivityName="com.zyq.myapplication.CrimeListActivity" >
 
             <meta-data android:name="android.support.PARENT_ACTIVITY"
                 android:value=".CrimeListActivity"/>
