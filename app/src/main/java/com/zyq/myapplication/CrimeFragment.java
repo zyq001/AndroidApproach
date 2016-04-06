@@ -109,6 +109,14 @@ public class CrimeFragment extends Fragment {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_crime, container, false);
 //        crime =
+
+        Button loadWVBtn = (Button) v.findViewById(R.id.load_wv_button);
+        loadWVBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), WebViewActivity.class));
+            }
+        });
         editeTest = (EditText) v.findViewById(R.id.crimeTitle);
         editeTest.addTextChangedListener(new TextWatcher() {
             @Override

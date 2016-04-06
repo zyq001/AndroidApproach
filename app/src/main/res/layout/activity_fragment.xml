@@ -19,5 +19,11 @@
         tools:context=".SingleFragmentActivity"
         >
 
+        <ViewFlipper android:id="@+id/ViewFlipper"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            >
+        </ViewFlipper>
+
     </FrameLayout>
 </LinearLayout>

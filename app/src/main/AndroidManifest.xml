@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.zyq.myapplication">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,6 +10,7 @@
         android:supportsRtl="true"
 
         android:theme="@style/AppTheme">
+        <!--<uses-permission android:name="android.permission.INTERNET"/>-->
         <!--<activity android:name=".SingleFragmentActivity">-->
 
             <!--&lt;!&ndash; <intent-filter> &ndash;&gt;-->
@@ -24,6 +26,22 @@
         <!-- android:name=".AnotherActivity" -->
         <!-- android:label="@string/title_activity_another" -->
         <!-- android:theme="@style/AppTheme.NoActionBar"></activity> -->
+        <activity android:name=".WebViewActivity"/>
+        <activity android:name=".utils.turntest">
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
+
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
+        </activity>
+        <activity android:name=".utils.TestWebViewFlip">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
         <activity
             android:name=".CrimeListActivity"
             android:label="@string/title_activity_crime_list"
@@ -31,11 +49,11 @@
             <!--android:theme="@style/AppTheme.NoActionBar"-->
             <!-->-->
 
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
         </activity>
         <activity
             android:name=".CrimePagerActivity"

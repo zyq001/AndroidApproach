@@ -44,4 +44,10 @@
         android:layout_height="wrap_content"
         android:text="@string/crime_solved_label"
         android:id="@+id/checkBox" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="open webv"
+        android:id="@+id/load_wv_button" />
 </LinearLayout>
